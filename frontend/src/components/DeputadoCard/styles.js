@@ -23,6 +23,10 @@ export const Card = styled.div`
         transform: scale(1.02);
         cursor: pointer;
     }
+
+    &:active {
+        transform: scale(0.90);
+    }
 `
 
 export const CardData = styled.div`
