@@ -37,7 +37,7 @@ export const CardData = styled.div`
     margin: auto 0;
 
     h2 {
-        font-size: 1.25rem;
+        font-size: 1.10rem;
         margin-bottom: 0.5rem;
     }
 
