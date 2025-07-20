@@ -7,4 +7,10 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
     }
+
+    :root {
+        @media (min-width: 1600px) {
+            font-size: 115%;
+        }
+    }
 `
