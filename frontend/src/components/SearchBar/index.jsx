@@ -3,7 +3,7 @@ import { Container } from "./styles";
 
 export function SearchBar({ ...rest}) {
   return (
-    <Container {...rest}>
+    <Container>
       <FaSearch />
       <input type="text" {...rest} />
     </Container>
