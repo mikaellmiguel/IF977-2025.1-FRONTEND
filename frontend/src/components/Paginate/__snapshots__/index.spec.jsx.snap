@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Paginate deve bater snapshot básico 1`] = `
+<div>
+  <div>
+    <button>
+      «
+    </button>
+    <button>
+      1
+    </button>
+    <button>
+      2
+    </button>
+    <button>
+      »
+    </button>
+  </div>
+</div>
+`;
