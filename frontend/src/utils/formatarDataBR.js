@@ -1,8 +1,4 @@
 export function formatarDataBR(dataISO) {
-  const data = new Date(dataISO);
-  const dia = String(data.getDate()).padStart(2, '0');
-  const mes = String(data.getMonth() + 1).padStart(2, '0');
-  const ano = data.getFullYear();
-
+  const [ano, mes, dia] = dataISO.split('-');
   return `${dia}/${mes}/${ano}`;
 }
