@@ -2,6 +2,10 @@ import { calcularIdade } from "../../utils/calcularIdade";
 import { formatarDataBR } from "../../utils/formatarDataBR";
 
 import {Container, MainContent, BackButton, InfoItem, InfoList, Sidebar, DeputadoName, ContactCol, ContactRow, ContactItem, SectionTitle, PaginateWrapper} from "./styles";
+import { DespesasTable } from "../../components/DespesasTable";
+import { DespesasFilters } from "../../components/DespesasTable/Filters";
+import { Paginate } from "../../components/Paginate";
+import { useState } from "react";
 
 
 import { Button } from "../../components/Button";
@@ -10,6 +14,40 @@ import { renderRedeSocial } from "../../utils/renderRedeSocial";
 
 export function DeputadosDetails() {
 
+  // MOCK de despesas para teste inicial
+  const despesasMock = [
+    {
+      id: 1,
+      descricao: "DIVULGAÇÃO DA ATIVIDADE PARLAMENTAR.",
+      valor_documento: 16142.9,
+      data_emissao: "2025-07-01T00:00:00",
+      fornecedor: "ELIEZER CONCEIÇÃO LIMA",
+      sigla_uf: "AP"
+    },
+    {
+      id: 2,
+      descricao: "LOCAÇÃO DE VEÍCULOS.",
+      valor_documento: 5000.0,
+      data_emissao: "2025-07-10T00:00:00",
+      fornecedor: "LOCADORA XPTO LTDA",
+      sigla_uf: "MT"
+    }
+  ];
+  // Filtros e paginação (mockados)
+  const tipos = ["DIVULGAÇÃO DA ATIVIDADE PARLAMENTAR.", "LOCAÇÃO DE VEÍCULOS."];
+  const estados = ["AP", "MT"];
+  const [page, setPage] = useState(1);
+  const [filteredDespesas, setFilteredDespesas] = useState(despesasMock);
+
+  function handleFilter({ tipo, estado, valorMin, valorMax }) {
+    let result = despesasMock;
+    if (tipo) result = result.filter(d => d.descricao === tipo);
+    if (estado) result = result.filter(d => d.sigla_uf === estado);
+    if (valorMin) result = result.filter(d => d.valor_documento >= parseFloat(valorMin));
+    if (valorMax) result = result.filter(d => d.valor_documento <= parseFloat(valorMax));
+    setFilteredDespesas(result);
+    setPage(1);
+  }
   const deputado = {
     id: 220594,
     nome_civel: "JONILDO JOSÉ DE ASSIS",
@@ -72,6 +110,12 @@ export function DeputadosDetails() {
             ))}
           </ContactCol>
         </ContactRow>
+        <SectionTitle>Despesas</SectionTitle>
+        <DespesasFilters tipos={tipos} estados={estados} onFilter={handleFilter} />
+        <DespesasTable despesas={filteredDespesas.slice((page-1)*10, page*10)} />
+    	<PaginateWrapper>
+          <Paginate pageCount={Math.ceil(filteredDespesas.length/10)} onPageChange={setPage} />
+        </PaginateWrapper>
       </MainContent>
     </Container>
   );
