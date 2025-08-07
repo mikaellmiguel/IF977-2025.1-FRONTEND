@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import {api} from "../../services/api";
 import { toast } from "react-toastify";
 import { Paginate } from "../../components/Paginate";
+import { useNavigate } from "react-router-dom";
 
 export function Homepage() {
   
@@ -13,6 +14,7 @@ export function Homepage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const limit = 24;
+    const navigate = useNavigate();
 
     async function fetchDeputados(page = 1) {
         try {
@@ -41,7 +43,7 @@ export function Homepage() {
                 <GridDeputados>
                     {Array.isArray(deputados) && deputados.length > 0 ? (
                         deputados.map((deputado) => (
-                            <DeputadoCard key={deputado.id} deputado={deputado} />
+                            <DeputadoCard key={deputado.id} deputado={deputado} onClick={() => navigate(`/deputados/${deputado.id}`)} />
                         ))
                     ) : (
                         <p>Nenhum deputado encontrado.</p>
