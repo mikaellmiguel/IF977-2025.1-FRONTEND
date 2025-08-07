@@ -2,7 +2,7 @@ import { calcularIdade } from "../../utils/calcularIdade";
 import { formatarDataBR } from "../../utils/formatarDataBR";
 import {Container, MainContent, BackButton, InfoItem, InfoList, Sidebar, DeputadoName, ContactCol, ContactRow, ContactItem, SectionTitle, PaginateWrapper} from "./styles";
 import { DespesasTable } from "../../components/DespesasTable";
-// import { DespesasFilters } from "../../components/DespesasTable/Filters";
+import { DespesasFilters } from "../../components/DespesasTable/Filters";
 import { Paginate } from "../../components/Paginate";
 import { useState, useEffect} from "react";
 import { api } from "../../services/api";
@@ -17,30 +17,56 @@ export function DeputadosDetails() {
 	const [despesas, setDespesas] = useState([]);
 	const [totalPages, setTotalPages] = useState(1);
 	const [page, setPage] = useState(1);
+	const [filtros, setFiltros] = useState({});
 	const navigate = useNavigate();
 
 	const { id } = useParams();
 
-	async function fetchDespesas(page = 1, filtros = {}) {
+	// Tipos e estados mockados
+	const tipos = [
+	"AQUISIÇÃO DE TOKENS E CERTIFICADOS DIGITAIS",
+	"ASSINATURA DE PUBLICAÇÕES",
+	"COMBUSTÍVEIS E LUBRIFICANTES.",
+	"CONSULTORIAS, PESQUISAS E TRABALHOS TÉCNICOS.",
+	"DIVULGAÇÃO DA ATIVIDADE PARLAMENTAR.",
+	"FORNECIMENTO DE ALIMENTAÇÃO DO PARLAMENTAR",
+	"HOSPEDAGEM ,EXCETO DO PARLAMENTAR NO DISTRITO FEDERAL."
+	];
+	const estados = ["PE", "SP", "RJ", "DF", "MG", "RS", "BA", "PR", "SC", "GO", "ES", "CE", "PA", "AM", "MA", "PB", "RN", "PI", "MT", "MS", "SE", "AL", "RO", "TO", "AC", "AP", "RR"];
 
-		const limit = 10;
-		const offset = (page - 1) * limit;
 
-		const params = new URLSearchParams({
-			limit,
-			offset,
-			...filtros,
-		});
+	function handleFilter({ tipo, estado, valorMin, valorMax }) {
+	setPage(1);
+	const filtrosApi = {};
+	if (tipo) filtrosApi.tipo = tipo;
+	if (estado) filtrosApi.uf = estado;
+	if (valorMin) filtrosApi.valor_min = valorMin;
+	if (valorMax) filtrosApi.valor_max = valorMax;
+	setFiltros(filtrosApi);
+	}
 
-		try {
-			const response = await api.get(`/despesas/deputados/${id}?${params.toString()}`);
-			setDespesas(response.data.dados);
-			setTotalPages(Math.ceil(response.data.total / limit));
-		}
-		catch {
-			toast.error("Erro ao buscar despesas do deputado");
-			setTotalPages(1);
-		}
+	function handleClear() {
+	setPage(1);
+	setFiltros({});
+	}
+
+	async function fetchDespesas(page = 1, filtrosArg = {}) {
+	const limit = 10;
+	const offset = (page - 1) * limit;
+	const params = new URLSearchParams({
+		limit,
+		offset,
+		...filtrosArg,
+	});
+	try {
+		const response = await api.get(`/despesas/deputados/${id}?${params.toString()}`);
+		setDespesas(response.data.dados);
+		setTotalPages(Math.ceil(response.data.total / limit));
+	}
+	catch {
+		toast.error("Erro ao buscar despesas do deputado");
+		setTotalPages(1);
+	}
 	}
 
 	useEffect(() => {
@@ -52,9 +78,9 @@ export function DeputadosDetails() {
 	}, [id]);
 
 	useEffect(() => {
-		fetchDespesas(page);
+	fetchDespesas(page, filtros);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, id]); 
+	}, [page, id, filtros]);
 
 	return (
 		<Container>
@@ -95,10 +121,10 @@ export function DeputadosDetails() {
 			</ContactCol>
 			</ContactRow>
 			<SectionTitle>Despesas</SectionTitle>
-			{/* <DespesasFilters tipos={tipos} estados={estados} onFilter={handleFilter} /> */}
+			<DespesasFilters tipos={tipos} estados={estados} onFilter={handleFilter} onClear={handleClear} />
 			<DespesasTable despesas={despesas} />
 			<PaginateWrapper>
-				<Paginate pageCount={totalPages} onPageChange={setPage} />
+				<Paginate pageCount={totalPages} onPageChange={setPage} forcePage={page - 1} />
 			</PaginateWrapper>
 		</MainContent>
 		</Container>
