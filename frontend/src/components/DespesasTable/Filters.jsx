@@ -46,7 +46,7 @@ export function DespesasFilters({ tipos, estados, onFilter, onClear }) {
       </Select>
       <Input type="number" placeholder="Valor mín" value={valorMin} onChange={e => setValorMin(e.target.value)} min="0" step="0.01" />
       <Input type="number" placeholder="Valor máx" value={valorMax} onChange={e => setValorMax(e.target.value)} min="0" step="0.01" />
-      <Button type="submit">Filtrar</Button>
+      <Button type="submit" disabled={!tipo && !estado && !valorMin && !valorMax}>Filtrar</Button>
       <Button type="button" onClick={handleClear} style={{ marginLeft: 8 }} disabled={!tipo && !estado && !valorMin && !valorMax}>
         Limpar
       </Button>
