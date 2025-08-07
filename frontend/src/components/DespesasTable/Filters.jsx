@@ -14,6 +14,14 @@ export function DespesasFilters({ tipos, estados, onFilter }) {
     onFilter({ tipo, estado, valorMin, valorMax });
   }
 
+  function handleClear() {
+    setTipo("");
+    setEstado("");
+    setValorMin("");
+    setValorMax("");
+    onFilter({ tipo: "", estado: "", valorMin: "", valorMax: "" });
+  }
+
   return (
     <FiltersForm onSubmit={handleSubmit}>
       <Select value={tipo} onChange={e => setTipo(e.target.value)}>
