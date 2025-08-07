@@ -1,7 +1,6 @@
 import {StyledPaginate} from "./styles";
 
-export function Paginate({ pageCount, onPageChange }) {
-
+export function Paginate({ pageCount, onPageChange, forcePage }) {
     return (
         <StyledPaginate 
             pageCount={pageCount}
@@ -12,6 +11,7 @@ export function Paginate({ pageCount, onPageChange }) {
             activeClassName="active"
             previousLabel="«"
             nextLabel="»"
+            forcePage={forcePage}
         />
     )
 }
