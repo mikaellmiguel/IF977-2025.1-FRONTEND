@@ -2,9 +2,9 @@ import { calcularIdade } from "../../utils/calcularIdade";
 import { formatarDataBR } from "../../utils/formatarDataBR";
 import { Card, CardData, CardImage} from "./styles"
 
-export function DeputadoCard({ deputado }) {
+export function DeputadoCard({ deputado, onClick }) {
   return (
-    <Card>
+    <Card onClick={onClick}>
         <CardImage src={deputado.url_foto} alt={`${deputado.nome} - ${deputado.partido}`} />
         <CardData>
             <h2>{deputado.nome}</h2>

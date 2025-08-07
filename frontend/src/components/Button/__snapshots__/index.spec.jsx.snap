@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Button aplica estilos de hover e active (snapshot) 1`] = `
+<button
+  class="sc-bRKDuR jDSreh"
+>
+  Hover
+</button>
+`;
