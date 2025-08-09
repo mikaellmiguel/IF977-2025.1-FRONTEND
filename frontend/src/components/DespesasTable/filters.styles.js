@@ -33,8 +33,16 @@ export const Button = styled.button`
   color: #fff;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: 0.3s;
   &:hover {
     background: #005fa3;
+    scale: 1.05;
+  }
+  
+  &:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    scale: 1;
   }
 `;

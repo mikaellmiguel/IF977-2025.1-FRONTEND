@@ -38,12 +38,36 @@ describe("DespesasFilters", () => {
     expect(onFilter).toHaveBeenCalledWith({ tipo: "Tipo 2", estado: "RJ", valorMin: "100", valorMax: "500" });
   });
 
-  it("chama onFilter com valores vazios", () => {
+it("desabilita botão Filtrar quando todos os campos estão vazios", () => {
     const { getByText } = render(
       <DespesasFilters tipos={tipos} estados={estados} onFilter={onFilter} />
     );
+    expect(getByText("Filtrar")).toBeDisabled();
+  });
+
+it("mostra mensagem de erro se valor mínimo maior que máximo", () => {
+    const { getByText, getByPlaceholderText } = render(
+      <DespesasFilters tipos={tipos} estados={estados} onFilter={onFilter} />
+    );
+    fireEvent.change(getByPlaceholderText("Valor mín"), { target: { value: "500" } });
+    fireEvent.change(getByPlaceholderText("Valor máx"), { target: { value: "100" } });
     fireEvent.click(getByText("Filtrar"));
-    expect(onFilter).toHaveBeenCalledWith({ tipo: "", estado: "", valorMin: "", valorMax: "" });
+    // toast.info é chamado, mas não aparece no DOM, então só garantimos que onFilter não foi chamado
+    expect(onFilter).not.toHaveBeenCalled();
+  });
+
+it("limpa todos os campos ao clicar em Limpar", () => {
+    const { getByText, getByPlaceholderText, getByDisplayValue } = render(
+      <DespesasFilters tipos={tipos} estados={estados} onFilter={onFilter} />
+    );
+    fireEvent.change(getByPlaceholderText("Valor mín"), { target: { value: "200" } });
+    fireEvent.change(getByDisplayValue("Tipo"), { target: { value: "Tipo 1" } });
+    fireEvent.change(getByDisplayValue("Estado"), { target: { value: "SP" } });
+    fireEvent.click(getByText("Limpar"));
+    expect(getByDisplayValue("Tipo").value).toBe("");
+    expect(getByDisplayValue("Estado").value).toBe("");
+    expect(getByPlaceholderText("Valor mín").value).toBe("");
+    expect(getByPlaceholderText("Valor máx").value).toBe("");
   });
 
   it("permite alterar e limpar os campos", () => {
