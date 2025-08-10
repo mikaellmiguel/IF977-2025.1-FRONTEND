@@ -47,3 +47,51 @@ export const Img = styled.div`
   background-position: center;
   filter: brightness(0.8);
 `;
+
+export const GoogleAuth = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  
+  
+  
+
+  > div {
+    width: 100%;
+    transition: 0.3s;
+    color: ${theme.COLORS.PRIMARY};
+    border-radius: 0.5rem;
+
+    &:hover {
+        filter: brightness(1.2);
+        transform: scale(1.1);
+    }
+
+    &:active{
+        transform: scale(0.9);
+    }
+
+    div {
+      color: ${theme.COLORS.PRIMARY};
+      border-radius: 0.5rem;
+    }
+  }
+
+  > div > div > div > div > div {
+      display: flex;
+      padding: 1rem;
+
+      > span {
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: ${theme.COLORS.PRIMARY};
+        font-size: 1rem;
+      }
+
+      div > svg {
+        width: 1rem;
+      }
+  }
+
+`;

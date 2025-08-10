@@ -1,12 +1,11 @@
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
-import { Container, Form, Left, Img, Buttons } from "./styles";
+import { Container, Form, Left, Img, Buttons, GoogleAuth} from "./styles";
 import { useState } from "react";
-// import { useAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/useAuth.jsx";
 import { toast } from "react-toastify";
-// import { validarEmail } from "../../utils/validarEmail";
-import { useGoogleLogin } from '@react-oauth/google'
-import { FcGoogle } from 'react-icons/fc';
+import { validarEmail } from "../../utils/validarEmail";
+import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 
 export function SignIn() {
@@ -16,31 +15,19 @@ export function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // const {signIn} = useAuth();
+    const {signIn} = useAuth();
 
     function handleSignIn(){
         if (email === "" || password === "") {
             toast.error("Preencha todos os campos");
             return;
         }
-        // if(validarEmail(email) === false) {
-        //     toast.error("E-mail inválido");
-        //     return;
-        // }
-        //signIn({email, password})
+        if(validarEmail(email) === false) {
+            toast.error("E-mail inválido");
+            return;
+        }
+        signIn({email, password})
     }
-    
-
-    const googleSignIn = useGoogleLogin({
-        onSuccess: (tokenResponse) => {
-            console.log(tokenResponse);
-            // Aqui você pode enviar o token para o backend ou salvar no contexto
-        },
-        onError: () => {
-            toast.error("Falha no login com Google");
-        },
-        flow: 'implicit',
-    });
 
     return (
         <Container>
@@ -55,10 +42,17 @@ export function SignIn() {
                         <Button onClick={() => handleSignIn()}>Entrar</Button>
                         <Button onClick={() => navigate("/register")}>Cadastrar-se</Button>
                 </Buttons>
-                <Button onClick={googleSignIn} style={{width: "100%", display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center'}}>
-                        <FcGoogle size={24} />
-                        Entrar com Google
-                </Button>
+                <GoogleAuth>
+                    <GoogleLogin
+                        onSuccess={credentialResponse => {
+                            console.log('Login Success:', credentialResponse);
+                            signIn({}, credentialResponse.credential);
+                        }}
+                        onError={() => {
+                            toast.error("Falha no login com Google");
+                        }} size="large"
+                    />
+                </GoogleAuth>
             </Left>
             <Img></Img>
         </Container>
