@@ -72,15 +72,14 @@ export function useVerifyCode(length) {
     };
 
     async function confirmToken(token) {
-        const response = await api.get('auth/confirm/email', { params: { token } })
-        const email = response.data.email;
-
-        if (response.status === 200) {
-            return email;
-        } else {
-            navigate("/404");
+        try {
+            const response = await api.get('auth/confirm/email', { params: { token } })
+            if (response.status === 200) {
+                return response.data.email;
+            }
+        } catch {
+            navigate("/404", {replace: true});
         }
-
     }
 
     async function resendCode(email) {

@@ -122,13 +122,13 @@ describe('useVerifyCode', () => {
     });
 
     it('deve navegar para /404 em caso de erro', async () => {
-      api.get.mockResolvedValue({ status: 400, data: {} });
+      api.get.mockRejectedValue(new Error('Erro')); // força erro
       let result;
       render(<HookWrapper length={4} onResult={r => (result = r)} />);
       await act(async () => {
         await result.confirmToken('token123');
       });
-      expect(mockNavigate).toHaveBeenCalledWith('/404');
+      expect(mockNavigate).toHaveBeenCalledWith('/404', { replace: true });
     });
   });
 
