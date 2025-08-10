@@ -1,10 +1,13 @@
 import { BottomMenu, Container, LogoImage, MainMenu, MenuItem } from "./styles";
-import { FaUserTie } from "react-icons/fa";
+import { FaUserTie, FaSignOutAlt } from "react-icons/fa";
 import { BsPinAngleFill } from "react-icons/bs";
 import { FaRankingStar } from "react-icons/fa6";
 import logo from "../../assets/logo.png";
+import { useAuth } from "../../hooks/useAuth";
 
 export function SideBar() {
+    const { signOut } = useAuth();
+
     return (
         <Container>
             <LogoImage>
@@ -29,8 +32,8 @@ export function SideBar() {
                 <MenuItem>
                     <FaUserTie /> Perfil
                 </MenuItem>
-                <MenuItem>
-                    <BsPinAngleFill /> Sair
+                <MenuItem onClick={() => signOut()}>
+                    <FaSignOutAlt /> Sair
                 </MenuItem>
             </BottomMenu>
         </Container>
