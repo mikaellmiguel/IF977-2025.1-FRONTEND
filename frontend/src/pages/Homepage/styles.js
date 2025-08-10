@@ -26,4 +26,12 @@ export const GridDeputados = styled.div`
     overflow-y: auto;
 `;
 
-
+export const SearchFiltersBar = styled.div`
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0 4rem;
+`;
