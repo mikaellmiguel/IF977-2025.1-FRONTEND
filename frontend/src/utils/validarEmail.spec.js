@@ -1,4 +1,4 @@
-const validarEmail = require('./validarEmail');
+import { validarEmail } from "./validarEmail";
 
 describe('validarEmail', () => {
   it('retorna true para e-mails válidos comuns', () => {

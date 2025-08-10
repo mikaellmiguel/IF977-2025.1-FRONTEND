@@ -1,4 +1,4 @@
-function validarEmail(email) {
+export function validarEmail(email) {
     if (typeof email !== 'string') return false;
     // Regex melhorada para aceitar subdomínios e hífens
     const regex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
@@ -9,5 +9,3 @@ function validarEmail(email) {
     if (domain.includes('..')) return false;
     return true;
 }
-
-module.exports = validarEmail;
