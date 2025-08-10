@@ -76,7 +76,6 @@ export function useVerifyCode(length) {
         const email = response.data.email;
 
         if (response.status === 200) {
-            console.log(email);
             return email;
         } else {
             navigate("/404");
