@@ -4,7 +4,8 @@ import {FiFlag, FiMapPin, FiBookOpen, FiCalendar} from "react-icons/fi";
 import { calcularIdade } from "../../utils/calcularIdade";
 import { formatarDataBR } from "../../utils/formatarDataBR";
 
-export function DeputadoSidebar({ deputado, onBack }) {
+export function DeputadoSidebar({ deputado, onBack, isFollowing, onFollow }) {
+
   return (
     <Sidebar>
       <BackButton onClick={onBack}>← Voltar</BackButton>
@@ -16,7 +17,7 @@ export function DeputadoSidebar({ deputado, onBack }) {
         <InfoItem><FiBookOpen /> {deputado.escolaridade || "Não Informado"}</InfoItem>
         <InfoItem><FiCalendar /> {`${formatarDataBR(deputado.data_nascimento || "Não Informado")} - (${calcularIdade(deputado.data_nascimento)})`}</InfoItem>
       </InfoList>
-      <Button>{"★ Remover dos Favoritos"}</Button>
+      <Button onClick={onFollow}>{isFollowing ? "★ Deixar de Seguir" : "☆ Seguir Deputado"}</Button>
     </Sidebar>
   );
 }

@@ -11,10 +11,14 @@ export function useDeputadoDetais(deputadoid) {
     const [filtros, setFiltros] = useState({});
     const [tipos, setTipos] = useState([]);
     const [estados, setEstados] = useState([]);
+    const [isFollowing, setIsFollowing] = useState(deputado.isFollowing || false);
 
     useEffect(() => {
         getDeputadosById(deputadoid)
-            .then(setDeputado)
+            .then(deputado => {
+                setDeputado(deputado);
+                setIsFollowing(deputado.isFollowing || false);
+            })
             .catch(() => toast.error("Erro ao buscar detalhes do deputado"));
     }, [deputadoid]);
 
@@ -41,5 +45,5 @@ export function useDeputadoDetais(deputadoid) {
         if (deputadoid) fetchReferencias();
     }, [deputadoid]);
 
-    return { deputado, despesas, totalPages, page, setPage, filtros, setFiltros, tipos, estados };
+    return { deputado, despesas, totalPages, page, setPage, filtros, setFiltros, tipos, estados, isFollowing, setIsFollowing };
 }

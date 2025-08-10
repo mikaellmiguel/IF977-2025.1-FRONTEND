@@ -12,6 +12,7 @@ export function AppRoutes() {
         <Route path="/deputados/:id" element={<DeputadosDetails />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/404" element={<NotFound />} />
+        <Route path="/follows" element={<Follows />} />
         <Route path="/profile" element={<Profile />} />
     </Routes>
   );

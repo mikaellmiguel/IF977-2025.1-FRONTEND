@@ -13,13 +13,13 @@ const deputadoMock = {
 
 describe("DeputadoSidebar", () => {
   it("renderiza todos os dados do deputado", () => {
-    render(<DeputadoSidebar deputado={deputadoMock} onBack={() => {}} />);
+    render(<DeputadoSidebar deputado={deputadoMock} onBack={() => {}} isFollowing={true} />);
     expect(screen.getByText("Fulano de Tal")).toBeInTheDocument();
     expect(screen.getByText("ABC")).toBeInTheDocument();
     expect(screen.getByText("PE")).toBeInTheDocument();
     expect(screen.getByText("Superior Completo")).toBeInTheDocument();
     expect(screen.getByRole("img")).toHaveAttribute("src", deputadoMock.url_foto);
-    expect(screen.getByText(/Remover dos Favoritos/)).toBeInTheDocument();
+    expect(screen.getByText(/Deixar de Seguir/)).toBeInTheDocument();
     expect(screen.getByText("← Voltar")).toBeInTheDocument();
   });
 
@@ -39,8 +39,8 @@ describe("DeputadoSidebar", () => {
     expect(onBack).toHaveBeenCalled();
   });
 
-  it("renderiza botão de favoritos", () => {
-    render(<DeputadoSidebar deputado={deputadoMock} onBack={() => {}} />);
-    expect(screen.getByText(/Remover dos Favoritos/)).toBeInTheDocument();
+  it("renderiza botão de favoritos quando isFollowing é true", () => {
+    render(<DeputadoSidebar deputado={deputadoMock} onBack={() => {}} isFollowing={true} />);
+    expect(screen.getByText(/Deixar de Seguir/)).toBeInTheDocument();
   });
 });
