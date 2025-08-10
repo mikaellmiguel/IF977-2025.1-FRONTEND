@@ -3,11 +3,17 @@ import { createRoot } from 'react-dom/client'
 import { Routes } from './routes'
 import { GlobalStyle } from './styles/global.js'
 import { ToastContainer } from 'react-toastify'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import { AuthProvider } from './hooks/useAuth'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <GlobalStyle />
     <ToastContainer position='top-center' toastStyle={{ width: "35rem", fontSize: "1rem", padding: "1.5rem", fontFamily: "Poppins"}}/>
-    <Routes />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </GoogleOAuthProvider>
   </StrictMode>,
 )
