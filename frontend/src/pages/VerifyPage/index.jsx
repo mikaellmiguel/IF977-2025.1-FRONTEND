@@ -21,7 +21,7 @@ export function VerifyPage() {
                 const email = await confirmToken(token);
                 setEmail(email);
             } else {
-                navigate("/404");
+                navigate("/404", {replace: true});
             }
         }
         fetchEmail();
