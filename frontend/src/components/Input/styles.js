@@ -23,5 +23,10 @@ export const Container = styled.div`
     &::placeholder {
       color: ${theme.COLORS.BG_400};
     }
+
+    &:disabled {
+      filter: brightness(0.7);
+      cursor: not-allowed;
+    }
   }
 `;	
