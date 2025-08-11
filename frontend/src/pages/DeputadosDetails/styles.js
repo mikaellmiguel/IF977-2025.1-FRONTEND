@@ -1,3 +1,16 @@
+export const GraficosGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+`;
+
+export const GraficoBox = styled.div`
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 1rem;
+`;
+
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 

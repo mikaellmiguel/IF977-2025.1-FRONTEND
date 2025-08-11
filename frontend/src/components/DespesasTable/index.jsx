@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from "./styles";
+import { MdInsertDriveFile } from "react-icons/md";
+
 
 export function DespesasTable({ despesas }) {
   return (
@@ -13,6 +15,7 @@ export function DespesasTable({ despesas }) {
             <Th>Data</Th>
             <Th>Fornecedor</Th>
             <Th>UF</Th>
+            <Th style={{ width: 40, textAlign: 'center' }}>Doc</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -23,6 +26,13 @@ export function DespesasTable({ despesas }) {
               <Td>{new Date(despesa.data_emissao).toLocaleDateString("pt-BR")}</Td>
               <Td>{despesa.fornecedor}</Td>
               <Td>{despesa.sigla_uf}</Td>
+              <Td style={{ width: 40, textAlign: 'center' }}>
+                {despesa.url_documento && (
+                  <a href={despesa.url_documento} target="_blank" rel="noopener noreferrer" title="Abrir documento">
+                    <MdInsertDriveFile size={22} color="#555" />
+                  </a>
+                )}
+              </Td>
             </Tr>
           ))}
         </Tbody>
@@ -38,8 +48,9 @@ DespesasTable.propTypes = {
       descricao: PropTypes.string.isRequired,
       valor_documento: PropTypes.number.isRequired,
       data_emissao: PropTypes.string.isRequired,
-      fornecedor: PropTypes.string.isRequired,
-      sigla_uf: PropTypes.string.isRequired,
+  fornecedor: PropTypes.string.isRequired,
+  sigla_uf: PropTypes.string.isRequired,
+  url_documento: PropTypes.string,
     })
   ).isRequired,
 };

@@ -6,7 +6,7 @@ export const Container = styled.div`
     gap: 0.5rem;
     border-radius: 12px;
     padding: 0 1rem;
-    width: 70vw;
+    flex: 1;
 
     background-color: ${theme.COLORS.BLUE_500};
 

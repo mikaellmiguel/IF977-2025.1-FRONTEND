@@ -6,6 +6,21 @@ import { api } from '../services/api';
 export function useDeputadoDetais(deputadoid) {
     const [deputado, setDeputado] = useState({});
     const [despesas, setDespesas] = useState([]);
+    const [estatisticas, setEstatisticas] = useState(null);
+    
+    useEffect(() => {
+        async function fetchEstatisticas() {
+            try {
+                const response = await api.get(`/despesas/statistics?deputado_id=${deputadoid}`);
+                setEstatisticas(response.data);
+            } catch {
+                setEstatisticas(null);
+                toast.error("Erro ao buscar estatísticas de despesas");
+            }
+        }
+        if (deputadoid) fetchEstatisticas();
+    }, [deputadoid]);
+    
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
     const [filtros, setFiltros] = useState({});
@@ -45,5 +60,5 @@ export function useDeputadoDetais(deputadoid) {
         if (deputadoid) fetchReferencias();
     }, [deputadoid]);
 
-    return { deputado, despesas, totalPages, page, setPage, filtros, setFiltros, tipos, estados, isFollowing, setIsFollowing };
+    return { deputado, despesas, estatisticas, totalPages, page, setPage, filtros, setFiltros, tipos, estados, isFollowing, setIsFollowing };
 }
