@@ -1,9 +1,9 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
-export function GraficoBarraAno({ data }) {
+export function GraficoBarraAno({ data, height=220 }) {
   // data: [{ ano: '2023', valor: 10000 }, ...]
   return (
-    <ResponsiveContainer width="99%" height={220}>
+    <ResponsiveContainer width="99%" height={height}>
       <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="ano" />
