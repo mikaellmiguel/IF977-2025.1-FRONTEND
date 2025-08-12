@@ -95,7 +95,7 @@ describe('useVerifyCode', () => {
       });
       expect(api.post).toHaveBeenCalledWith('auth/verify', { email: 'test@mail.com', verificationCode: '1234' });
       expect(toast.success).toHaveBeenCalled();
-      expect(mockNavigate).toHaveBeenCalledWith('/login');
+      expect(mockNavigate).toHaveBeenCalledWith('/login', {replace: true});
     });
 
     it('deve exibir erro em caso de falha na verificação', async () => {
