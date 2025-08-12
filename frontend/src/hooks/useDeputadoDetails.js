@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { getDeputadosById, getDespesasByDeputado } from '../services/deputados';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 export function useDeputadoDetais(deputadoid) {
     const [deputado, setDeputado] = useState({});
     const [despesas, setDespesas] = useState([]);
     const [estatisticas, setEstatisticas] = useState(null);
-    
+    const navigate = useNavigate();
+
     useEffect(() => {
         async function fetchEstatisticas() {
             try {
@@ -34,7 +36,8 @@ export function useDeputadoDetais(deputadoid) {
                 setDeputado(deputado);
                 setIsFollowing(deputado.isFollowing || false);
             })
-            .catch(() => toast.error("Erro ao buscar detalhes do deputado"));
+            .catch(() => toast.error("Erro ao buscar detalhes do deputado") && navigate("/404"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deputadoid]);
 
     useEffect(() => {
