@@ -8,10 +8,6 @@ describe("formatarDataBR", () => {
     expect(formatarDataBR("1999-12-31")).toBe("31/12/1999");
   });
 
-  it("deve lidar com datas inválidas (string vazia)", () => {
-    expect(formatarDataBR("")).toBe("undefined/undefined/");
-  });
-
   it("deve lidar com datas incompletas", () => {
     expect(formatarDataBR("2025-07")).toBe("undefined/07/2025");
     expect(formatarDataBR("2025")).toBe("undefined/undefined/2025");

@@ -4,19 +4,21 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28FD0', '#FF6F91'
 
 
 export function GraficoPizzaTipo({ data }) {
-  // data: [{ tipo: 'Aluguel', valor: 5000 }, ...]
+  // data: [{ tipo: 'Aluguel', valor: "5000" }, ...]
+  // Garante que todos os valores sejam números
+  const dataNumerica = data.map(item => ({ ...item, valor: Number(item.valor) || 0 }));
   return (
     <ResponsiveContainer width="100%" height={320}>
       <PieChart>
         <Pie
-          data={data}
+          data={dataNumerica}
           dataKey="valor"
           nameKey="tipo"
           cx="50%"
           cy="50%"
           outerRadius={110}
         >
-          {data.map((entry, index) => (
+          {dataNumerica.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
@@ -25,9 +27,10 @@ export function GraficoPizzaTipo({ data }) {
           align="right"
           verticalAlign="middle"
           formatter={(value, entry) => {
-            const total = data.reduce((acc, cur) => acc + cur.valor, 0);
+            const total = dataNumerica.reduce((acc, cur) => acc + cur.valor, 0);
             const percent = ((entry.payload.valor / total) * 100).toFixed(1);
-            return `${value}: ${percent}%`;
+            const valorFormatado = (entry.payload.valor ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            return `${value}: ${valorFormatado} (${percent}%)`;
           }}
           content={({ payload }) => (
             <LegendContainer>
@@ -35,14 +38,14 @@ export function GraficoPizzaTipo({ data }) {
                 <LegendItem key={`legend-item-${i}`}> 
                   <ColorBox color={entry.color} />
                   <LegendText>
-                    {entry.value}: {((entry.payload.valor / data.reduce((acc, cur) => acc + cur.valor, 0)) * 100).toFixed(1)}%
+                    {entry.value}: {(entry.payload.valor ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} ({((entry.payload.valor / dataNumerica.reduce((acc, cur) => acc + cur.valor, 0)) * 100).toFixed(1)}%)
                   </LegendText>
                 </LegendItem>
               ))}
             </LegendContainer>
           )}
         />
-        <Tooltip formatter={v => `R$ ${v.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} contentStyle={{ backgroundColor: "#fff" }}/>
+        <Tooltip formatter={v => Number(v ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} contentStyle={{ backgroundColor: "#fff" }}/>
       </PieChart>
     </ResponsiveContainer>
   );
