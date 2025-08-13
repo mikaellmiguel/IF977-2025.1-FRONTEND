@@ -24,7 +24,7 @@ export function RankingPodio({ deputados }) {
           <img src={item.url_foto} alt={item.nome} />
           <span>{item.nome || "-"}</span>
           <span>{item.partido} - {item.uf}</span>
-          <span>R$ {item.total_gasto?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+          <span>R$ {Number(item.total_gasto).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
         </PodioItem>
       ))}
     </Podio>
