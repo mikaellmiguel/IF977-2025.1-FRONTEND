@@ -6,7 +6,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28FD0', '#FF6F91'
 export function GraficoPizzaTipo({ data }) {
   // data: [{ tipo: 'Aluguel', valor: "5000" }, ...]
   // Garante que todos os valores sejam números
-  const dataNumerica = data.map(item => ({ ...item, valor: Number(item.valor) }));
+  const dataNumerica = data.map(item => ({ ...item, valor: Number(item.valor) || 0 }));
   return (
     <ResponsiveContainer width="100%" height={320}>
       <PieChart>
@@ -29,7 +29,7 @@ export function GraficoPizzaTipo({ data }) {
           formatter={(value, entry) => {
             const total = dataNumerica.reduce((acc, cur) => acc + cur.valor, 0);
             const percent = ((entry.payload.valor / total) * 100).toFixed(1);
-            const valorFormatado = entry.payload.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            const valorFormatado = (entry.payload.valor ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
             return `${value}: ${valorFormatado} (${percent}%)`;
           }}
           content={({ payload }) => (
@@ -38,14 +38,14 @@ export function GraficoPizzaTipo({ data }) {
                 <LegendItem key={`legend-item-${i}`}> 
                   <ColorBox color={entry.color} />
                   <LegendText>
-                    {entry.value}: {entry.payload.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} ({((entry.payload.valor / dataNumerica.reduce((acc, cur) => acc + cur.valor, 0)) * 100).toFixed(1)}%)
+                    {entry.value}: {(entry.payload.valor ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} ({((entry.payload.valor / dataNumerica.reduce((acc, cur) => acc + cur.valor, 0)) * 100).toFixed(1)}%)
                   </LegendText>
                 </LegendItem>
               ))}
             </LegendContainer>
           )}
         />
-        <Tooltip formatter={v => Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} contentStyle={{ backgroundColor: "#fff" }}/>
+        <Tooltip formatter={v => Number(v ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} contentStyle={{ backgroundColor: "#fff" }}/>
       </PieChart>
     </ResponsiveContainer>
   );
