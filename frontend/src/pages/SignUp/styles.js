@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import sign from "../../assets/sigin.png";
 
 export const Container = styled.div`
   display: flex;
@@ -42,7 +43,7 @@ export const Buttons = styled.div`
 
 export const Img = styled.div`
   flex: 1;
-  background-image: url("src/assets/sigin.png");
+  background-image: url(${sign});
   background-size: cover;
   background-position: center;
   filter: brightness(0.8);
