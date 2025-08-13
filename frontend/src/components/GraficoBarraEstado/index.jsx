@@ -4,7 +4,7 @@ export function GraficoBarraEstado({ data }) {
   return (
     <div>
       <h2 style={{ textAlign: 'center', marginBottom: 16 }}>Gastos por Estado</h2>
-      <ResponsiveContainer width="99%" height={300}>
+      <ResponsiveContainer width="90%" height={300}>
         <BarChart
           data={data}
           margin={{ top: 20, right: 30, left: 20, bottom: 20 }}

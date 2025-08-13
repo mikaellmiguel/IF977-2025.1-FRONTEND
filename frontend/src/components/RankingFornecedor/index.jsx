@@ -9,7 +9,7 @@ export function RankingFornecedores({ fornecedores }) {
             <span style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{item.fornecedor}</span>
           </div>
           <div style={{ minWidth: 120, textAlign: 'right', fontWeight: 'bold', color: '#444' }}>
-            R$ {item.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+            R$ {Number(item.total).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </div>
         </CardFornecedor>
       ))}

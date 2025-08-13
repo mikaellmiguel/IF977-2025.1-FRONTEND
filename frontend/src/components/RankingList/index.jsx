@@ -16,7 +16,7 @@ export function RankingList({ deputados }) {
                 <span style={{fontSize:'0.95rem', color:'#333'}}>{item.partido} - {item.uf}</span>
                 </InfoArea>
                 <TotalArea>
-                R$ {item.total_gasto?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                R$ {Number(item.total_gasto).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                 </TotalArea>
             </CardRanking>
             ))}

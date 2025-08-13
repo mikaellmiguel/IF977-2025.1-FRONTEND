@@ -22,7 +22,7 @@ export function DespesasTable({ despesas }) {
           {despesas.map((despesa) => (
             <Tr key={despesa.id}>
               <Td>{despesa.descricao}</Td>
-              <Td>R$ {despesa.valor_documento.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</Td>
+              <Td>R$ {Number(despesa.valor_documento).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</Td>
               <Td>{new Date(despesa.data_emissao).toLocaleDateString("pt-BR")}</Td>
               <Td>{despesa.fornecedor}</Td>
               <Td>{despesa.sigla_uf}</Td>

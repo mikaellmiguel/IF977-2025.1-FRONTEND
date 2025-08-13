@@ -32,12 +32,12 @@ export function FollowDeputadoCard({ deputado, despesasPorAno, totalGasto}) {
       </InfoArea>
       <DespesasArea>
         {Object.entries(despesasPorAno).map(([ano, valor]) => (
-          <div key={ano}>{ano}: R$ {valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+          <div key={ano}>{ano}: R$ {Number(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
         ))}
       </DespesasArea>
       <TotalArea>
         <b>Total Gasto</b>
-        <div>R$ {totalGasto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+        <div>R$ {Number(totalGasto).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
       </TotalArea>
     </CardContainer>
   );
