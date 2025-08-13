@@ -4,7 +4,7 @@ import { Button } from '../../components/Button';
 import theme from '../../styles/theme';
 import { useVerifyCode } from '../../hooks/useVerifyCode';
 // import { api } from "../../services/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 
 export function VerifyPage() {
@@ -15,9 +15,12 @@ export function VerifyPage() {
 
     const token = new URLSearchParams(window.location.search).get('token');
 
+    const fetchedRef = useRef(false);
     useEffect(() => {
+        if (fetchedRef.current) return;
+        fetchedRef.current = true;
         async function fetchEmail() {
-            if(token && token != 'undefined'){
+            if(token && token !== 'undefined'){
                 const email = await confirmToken(token);
                 setEmail(email);
             } else {
@@ -25,7 +28,8 @@ export function VerifyPage() {
             }
         }
         fetchEmail();
-    }, [confirmToken, navigate, token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token]);
 
 
     return (

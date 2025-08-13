@@ -63,7 +63,7 @@ export function useVerifyCode(length) {
             const response = await api.post('auth/verify', { email, verificationCode: code });
             if (response.status === 200) {
                 toast.success('Código verificado com sucesso!');
-                navigate('/login');
+                navigate('/login', { replace: true });
             }
         } catch (error) {
             const message = error.response?.data?.message || 'Erro ao verificar código. Tente novamente.';
