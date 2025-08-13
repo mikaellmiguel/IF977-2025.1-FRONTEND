@@ -6,12 +6,13 @@ import { AuthProvider } from  "../providers/AuthProvider";
 import { useAuth } from "../hooks/useAuth";
 
 function AuthConsumer() {
-    const { user } = useAuth();
-        return (
-            <AnimatePresence mode="wait">
-                {user ? <AppRoutes /> : <AuthRoutes />}
-            </AnimatePresence>
-        );
+    const { user, loading } = useAuth();
+    if (loading) return null; // ou um loader/spinner
+    return (
+        <AnimatePresence mode="wait">
+            {user ? <AppRoutes /> : <AuthRoutes />}
+        </AnimatePresence>
+    );
 }
 
 export function Routes() {

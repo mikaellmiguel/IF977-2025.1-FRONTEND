@@ -6,6 +6,7 @@ import {useNavigate } from "react-router-dom";
 
 export function AuthProvider({ children }) {
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   async function signIn({ email, password }, googleToken) {
@@ -48,18 +49,21 @@ export function AuthProvider({ children }) {
     const user = JSON.parse(localStorage.getItem('@FiscalizaDeputado:user'));
     const expiresIn = localStorage.getItem('@FiscalizaDeputado:expires_in');
 
-    if (expiresIn && Date.parse(expiresIn) < Date.now()) {
+    if (expiresIn && Date.parse(expiresIn) < Date.now() || !token) {
       toast.error("Sua sessão expirou, faça login novamente");
       setTimeout(() => signOut(), 500);
+      setLoading(false);
+      return;
     }
 
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setData({ token, user });
+    setLoading(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
+    <AuthContext.Provider value={{ signIn, signOut, user: data.user, loading }}>
       {children}
     </AuthContext.Provider>
   );
