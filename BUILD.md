@@ -1,6 +1,6 @@
 # 🚀 Instruções para Build Local
 
-**OBS:** Este projeto está em desenvolvimento, e as instruções a seguir irão guiá-lo na configuração inicial do ambiente e no processo de build, que será atualizado conforme o código for sendo desenvolvido.
+**OBS:** Este projeto está em desenvolvimento. As instruções abaixo guiam a configuração, build, execução e deploy do ambiente frontend.
 
 ## 🛠️ Ferramentas Necessárias
 Para configurar e desenvolver o projeto, será necessário:
@@ -18,34 +18,46 @@ cd IF977-2025.1-FRONTEND
 
 Após clonar o repositório, você precisará instalar as dependências necessárias para a execução do **frontend**:
 
-1. Navegue até a pasta `frontend/` e instale as dependências com o seguinte comando:
+1. Navegue até a pasta `frontend/` e instale as dependências com o comando:
 
 ```bash
-cd frotend
+cd frontend
 npm install
 ```
 
 ### 3. 🔑 Configuração de Variáveis de Ambiente
-Este projeto pode exigir variáveis de ambiente para funcionar corretamente, como chaves de API ou configurações do banco de dados. Verifique o arquivo .env.example e crie um arquivo .env na raiz do projeto com as configurações adequadas.
+Este projeto exige variáveis de ambiente para funcionar corretamente (ex: URL da API, chaves externas). Use o arquivo `.env.example` como referência e crie um `.env` na raiz do projeto:
 
 ```bash
 cp .env.example .env
 ```
 
-**OBS:** Edite o arquivo .env conforme necessário para o seu ambiente.
+Edite o `.env` conforme necessário para seu ambiente. Exemplos:
+
+```
+VITE_API_URL=https://sua-api.com
+VITE_GOOGLE_CLIENT_ID=seu-client-id.apps.googleusercontent.com
+# VITE_PUBLIC_KEY=exemplo-chave-publica
+```
 
 ### 4. ▶️ Executar o Projeto
-Por enquanto, o projeto está em fase inicial (Não possui código fonte), mas assim que as funcionalidades forem adicionadas, o comando para executar o projeto será algo como:
+Para rodar o frontend em modo desenvolvimento:
 
 ```bash
-npm start
+npm run dev
+```
+
+Para build de produção:
+
+```bash
+npm run build
+```
+
+Para preview do build:
+
+```bash
+npm run preview
 ```
 
 ## 📈 Status do Projeto
-Este projeto está atualmente em fase inicial de desenvolvimento. O código está sendo estruturado e as funcionalidades principais serão implementadas em breve. As instruções de build serão atualizadas conforme o progresso do desenvolvimento.
-
-## 📝 Planejamento Futuro
-As seguintes funcionalidades e etapas estão previstas:
-- Implementação do código-fonte e estruturação dos módulos.
-- Testes automatizados.
-- Documentação detalhada.
+Este projeto está atualmente em fase inicial de desenvolvimento. O código está sendo estruturado e as funcionalidades principais estão sendo implementadas. As instruções de build e deploy serão atualizadas conforme o progresso.
