@@ -5,6 +5,15 @@
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/mikaellmiguel/IF977-2025.1-FRONTEND.svg)](https://github.com/mikaellmiguel/IF977-2025.1-FRONTEND/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
+## 🔗 Links Úteis
+
+- **Jornada Típica do Usuário:** [Assista no YouTube](https://youtu.be/VFbpWc2Z9EY)
+- **Deploy do Frontend:** [Acesse o site](https://fiscalizadeputado.vercel.app/)
+- **Wireframes (Figma):** [Visualize os protótipos](https://www.figma.com/design/uYwHi7ngPUnYge16BvIlr7/Projeto-ES2025.1)
+- **Deploy do Backend:**  
+  - **Documentação da API:** [Swagger](https://fiscalizadeputado.azurewebsites.net/api-docs/)
+  - **Endpoint da API:** [https://fiscalizadeputado.azurewebsites.net/](https://fiscalizadeputado.azurewebsites.net/)
+
 
 ## 🏛️ Descrição Geral
 O FiscalizaDeputado é uma aplicação web desenvolvida para ampliar o acesso da população aos dados de despesas declaradas por deputados federais. Utilizando como fonte principal o portal de dados abertos da Câmara dos Deputados (Câmara Aberta), o sistema visa facilitar a fiscalização, aumentar a transparência e promover o controle social por meio de relatórios, visualizações e mapas interativos.
