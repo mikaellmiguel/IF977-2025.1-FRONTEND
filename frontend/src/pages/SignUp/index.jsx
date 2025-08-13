@@ -2,6 +2,7 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Container, Form, Left, Img, Buttons} from "./styles";
 import { useSignUp } from "../../hooks/useSignUp";
+import logo from '../../assets/logo.png';
 
 export function SignUp() {
     
@@ -17,7 +18,7 @@ export function SignUp() {
     return (
         <Container>
             <Left>
-                <img src="src/assets/logo.png" alt="Logo"/>
+                <img src={logo} alt="Logo"/>
                 <h1>Cadastrar-se</h1>
                 <Form>
                     <Input type="email" name="email" label="E-mail" value={email} onChange={e => setEmail(e.target.value)}/>

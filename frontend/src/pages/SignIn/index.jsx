@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { validarEmail } from "../../utils/validarEmail";
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
+import logo from '../../assets/logo.png';
 
 export function SignIn() {
 
@@ -32,7 +33,7 @@ export function SignIn() {
     return (
         <Container>
             <Left>
-                <img src="src/assets/logo.png" alt="Logo"/>
+                <img src={logo} alt="Logo"/>
                 <h1>Bem-Vindo ao FiscalizaDeputado!</h1>
                 <Form>
                     <Input type="email" name="email" label="E-mail" value={email} onChange={(event) => setEmail(event.target.value)}/>
